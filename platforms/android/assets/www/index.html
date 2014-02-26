@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<!-- <base href="http://lafayettecc.org/mobile/"> -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<!-- CODE FOR INSTALLING AS A WEB APP -->
+		<link rel="apple-touch-icon-precomposed" href="icon.png"/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<title>LCC Online</title>
+
+		<!-- BOOTSTRAP CSS -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+
+		<!-- webfont -->
+		<!--<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>-->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,700,300' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="css/style.css?cachebreaker=11">
+
+		<!-- jquery -->
+		<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+
+		<!-- Latest compiled and minified Bootstrap JavaScript -->
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<div class="menu-label">
+						menu
+					</div>
+					<div class="pull-right icon-bars">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+				</button>
+				<a class="navbar-brand" href="index.php"><img src="img/small-logo.png" /></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class=""><a href="/live/">Live Event</a></li>
+					<li><a href="/give/">Online Giving</a></li>
+					<li><a href="calendar.php">Calendar</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Podcasts <b class="caret"></b></a>
+						<ul class="dropdown-menu" aria-labelledby="toolBoxMenu">
+							<li><a href="custom_reader.php?podcast=audio&lcconlineapp&cachebreaker=11">Audio Podcasts</a></li>
+							<li><a href="custom_reader.php?podcast=video&lcconlineapp&cachebreaker=11">Video Podcasts</a></li>
+						</ul>
+					</li>
+					<li><a href="custom_reader.php?category=news&lcconlineapp&cachebreaker=11">News</a></li>
+					<li><a href="/blogs/">Blogs</a></li>
+					<li><a href="/news/">Website</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+	</div>
+	<div id="menu-spacer">&nbsp;</div>
+	<div id="content">
+		<a class="btn btn-primary btn-lg btn-block" href="/live">
+			<span class="glyphicon glyphicon-fire"></span>&nbsp;Live Event
+		</a>
+		<a class="btn btn-primary btn-lg btn-block" href="/give">
+			<span class="glyphicon glyphicon-usd"></span>&nbsp;Online Donations
+		</a>
+		<a class="btn btn-primary btn-lg btn-block" role="" href="calendar.php">
+			<span class="glyphicon glyphicon-calendar"></span>&nbsp;Calendar
+		</a>
+		<a class="btn btn-primary btn-lg btn-block" role="stored-page" href="custom_reader.php?category=news&lcconlineapp&cachebreaker=11">
+		<span class="glyphicon glyphicon-list"></span>&nbsp;Latest News
+		</a>
+		<a class="btn btn-primary btn-lg btn-block" role="stored-page" href="custom_reader.php?podcast=audio&lcconlineapp&cachebreaker=11">
+		<span class="glyphicon glyphicon-headphones"></span>&nbsp;Audio Podcasts</a>
+		<a class="btn btn-primary btn-lg btn-block" role="stored-page" href="custom_reader.php?podcast=video&lcconlineapp&cachebreaker=11">
+		<span class="glyphicon glyphicon-film"></span>&nbsp;Video Podcasts</a>
+		<a class="btn btn-primary btn-lg btn-block" role="stored-page" href="/blogs/" onclick="">
+			<span class="glyphicon glyphicon-pencil"></span>&nbsp;Blogs and Devotionals</a>
+		<a class="btn btn-primary btn-lg btn-block" href="http://lafayettecc.org/news"><span class="glyphicon glyphicon-globe"></span>&nbsp;Main Website</a>
+		<!-- <a class="btn btn-primary btn-lg btn-block" href="/media_player">LCC Media Player</a> -->
+	</div>
+</body>
+<script src="phonegap.js"></script>
+<script src="js/index.js"></script>
+<script type="text/javascript">
+	// LINK PRELOAD SCRIPT
+	var stored_pages = {};
+	var need_to_store = {};
+
+	function do_preload()
+	{
+		//$('a').click(function(event){ if (! do_link(this) ) event.preventDefault();});
+		$('a').each(function(index){
+			url = this.href;
+			need_to_store[url] = false;
+			if ($(this).attr('role') == "stored-page") need_to_store[url] = true;
+			if (need_to_store[url]) console.log('page will be stored');
+			$.get(
+				url,
+				function(data){
+					if (need_to_store[this.url]) window.stored_pages[this.url] = data;
+				}
+			)
+		});
+	}
+
+// Wait for device API libraries to load
+//     //
+//     document.addEventListener("deviceready", onDeviceReady, false);
+//
+// device APIs are available
+//     //
+//     function onDeviceReady() {
+//         var element = document.getElementById('deviceprops');
+//         element.innerHTML = 'Device Name: '     + device.name     + '<br />' +
+//                             'Device Cordova: '  + device.cordova  + '<br />' +
+//                             'Device Platform: ' + device.platform + '<br />' +
+//                             'Device UUID: '     + device.uuid     + '<br />' +
+//                             'Device Model: '    + device.model    + '<br />' +
+//                             'Device Version: '  + device.version  + '<br />';
+//     }
+
+	$(document).ready(function(){
+		app.initialize();
+	});
+
+</script>
+</html>

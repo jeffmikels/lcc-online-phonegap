@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<!-- CODE FOR INSTALLING AS A WEB APP -->
+		<link rel="apple-touch-icon-precomposed" href="icon.png"/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+
+		<title>LCC Quick Online Giving Page</title>
+
+		<!-- BOOTSTRAP CSS -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+
+		<!-- webfont -->
+		<!--<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>-->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,700,300' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="css/style.css?cachebreaker=13">
+
+		<!-- jquery -->
+		<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+
+		<!-- jquery -->
+		<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+		<link rel="stylesheet" href="css/jquery.mobile-1.3.0.min.css" />
+		<!-- <script src="js/jquery-1.8.2.min.js"></script> -->
+		<script src="js/jquery.mobile-1.3.0.min.js"></script>
+
+
+		<!-- Latest compiled and minified Bootstrap JavaScript -->
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<style>
+			body {padding-top:80px;}
+		</style>
+</head>
+<body>
+	<div data-role="page">
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<div class="menu-label">
+						menu
+					</div>
+					<div class="pull-right icon-bars">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+				</button>
+				<a class="navbar-brand" href="http://lafayettecc.org/mobile/index.php"><img src="img/small-logo.png" /></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class=""><a href="http://lafayettecc.org/live/?lcconlineapp">Live Event</a></li>
+					<li><a href="give-online.html?lcconlineapp">Online Donations</a></li>
+					<li><a href="http://lafayettecc.org/mobile/calendar.php?lcconlineapp">Calendar</a></li>
+					<li class="dropdown">
+						<a href="http://lafayettecc.org/mobile/#" class="dropdown-toggle" data-toggle="dropdown">Podcasts <b class="caret"></b></a>
+						<ul class="dropdown-menu" aria-labelledby="toolBoxMenu">
+							<li><a href="http://lafayettecc.org/mobile/custom_reader.php?podcast=audio&lcconlineapp&cachebreaker=11">Audio Podcasts</a></li>
+							<li><a href="http://lafayettecc.org/mobile/custom_reader.php?podcast=video&lcconlineapp&cachebreaker=11">Video Podcasts</a></li>
+						</ul>
+					</li>
+					<li><a href="http://lafayettecc.org/mobile/custom_reader.php?category=news&lcconlineapp&cachebreaker=11">News</a></li>
+					<li><a href="http://lafayettecc.org/blogs/?lcconlineapp">Blogs</a></li>
+					<li><a href="http://lafayettecc.org/news/?lcconlineapp">Website</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+	</div>
+
+	<div id="content">
+<h2>LCC Online Giving</h2>
+<p>Thank you so much for making a donation! It's our dream to help people in Lafayette discover the full life available to them in Christ, and your gifts make that dream possible.
+
+<p>We use <strong>PayPal</strong> for online donations. They will give you the option of using their payment system (PayPal account required), setting up an automatic withdrawal from your bank just like a check, or even using a credit card for recurring donations.
+
+<div data-role="collapsible-set" data-theme="b" data-content-theme="b">
+    <div data-role="collapsible">
+	<h3>Monthly Recurring Gifts</h3>
+	<p>PayPal will process the funds for us as something they call a "subscription" but it will still be registered with us as a tax-deductible donation.
+	<p><small>Note: Enter your number without any $ before it.</small>
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+
+	<input type="hidden" name="cmd" value="_xclick-subscriptions">
+	<input type="hidden" name="business" value="donate@lafayettecc.org">
+	<input type="hidden" name="item_name" value="Recurring Donation">
+	<input type="hidden" name="no_shipping" value="1">
+	<input type="hidden" name="no_note" value="1">
+	<input type="hidden" name="currency_code" value="USD">
+	<input type="hidden" name="bn" value="PP-SubscriptionsBF">
+	<label><strong>Monthly Donation:</strong></label><br />
+	<input type="text" name="a3" value="" placeholder="100.00 < -- no $ sign"/>
+	<input type="hidden" name="p3" value="1">
+	<input type="hidden" name="t3" value="M">
+	<input type="hidden" name="src" value="1">
+	<input type="hidden" name="sra" value="1">
+	<input type="submit" value="Set Up Automatic Donation" name="submit" />
+	</form>
+    </div>
+    <div data-role="collapsible">
+			<h3>One-time Gifts</h3>
+
+			<p>Of course, the monthly support is how we make plans for our ministry, but we will be more than happy to receive special gifts if God leads you to give that way.
+
+			<p>Select your gift amount: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=50%2e00&business=donate%40lafayettecc%2eorg&item_name=Lafayette%20Community%20Church%20Donation&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8">$50</a>
+			&nbsp;|&nbsp;
+			<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=100%2e00&business=donate%40lafayettecc%2eorg&item_name=Lafayette%20Community%20Church%20Donation&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8">$100</a>
+			&nbsp;|&nbsp;
+			<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=200%2e00&business=donate%40lafayettecc%2eorg&item_name=Lafayette%20Community%20Church%20Donation&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8">$200</a>
+			&nbsp;|&nbsp;
+			<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=500%2e00&business=donate%40lafayettecc%2eorg&item_name=Lafayette%20Community%20Church%20Donation&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8">$500</a>
+
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="">
+			<label><strong>Other:</strong></label><br />
+			<input type="text" name="amount" value="" placeholder="250.00 < -- no $ sign"/>
+			<input type="hidden" name="cmd" value="_xclick" />
+			<input type="hidden" name="business" value="donate@lafayettecc.org" />
+			<input type="hidden" name="item_name" value="Lafayette Community Church Donation" />
+			<input type="hidden" name="no_note" value="0" />
+			<input type="hidden" name="cn" value="Memo:" />
+			<input type="hidden" name="currency_code" value="USD" />
+			<input type="hidden" name="tax" value="0" />
+			<input type="hidden" name="bn" value="PP-DonationsBF" />
+			<input type="submit" name="submit" value="Make Donation" />
+			</form>
+    </div>
+
+</div>
+
+
+
+
+<p>If you want to give to our missionaries, click here: <a target="blank" href="http://lafayettecc.org/mission">Our Missionaries</a>.
+
+<p>We use <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=donate%40lafayettecc%2eorg&item_name=Lafayette%20Community%20Church%20Donation&no_shipping=0&no_note=1&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8">PayPal</a>.
+
+
+<div style="clear:both;"></div>
+
+
+<em>All gifts are tax deductible.</em>
+</div>
+	</div>
+</body>
+</html>

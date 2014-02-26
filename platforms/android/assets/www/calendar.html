@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<!-- CODE FOR INSTALLING AS A WEB APP -->
+		<link rel="apple-touch-icon-precomposed" href="/icon.png"/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<title>LCC Online</title>
+
+		<!-- BOOTSTRAP CSS -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+
+		<!-- webfont -->
+		<!--<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>-->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,700,300' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="css/style.css?cachebreaker=11">
+
+		<!-- jquery -->
+		<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+
+		<!-- Latest compiled and minified Bootstrap JavaScript -->
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<div class="menu-label">
+						menu
+					</div>
+					<div class="pull-right icon-bars">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+				</button>
+				<a class="navbar-brand" href="index.php"><img src="img/small-logo.png" /></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class=""><a href="/live/">Live Event</a></li>
+					<li><a href="/give/">Online Giving</a></li>
+					<li><a href="calendar.php">Calendar</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Podcasts <b class="caret"></b></a>
+						<ul class="dropdown-menu" aria-labelledby="toolBoxMenu">
+							<li><a href="custom_reader.php?podcast=audio&lcconlineapp&cachebreaker=11">Audio Podcasts</a></li>
+							<li><a href="custom_reader.php?podcast=video&lcconlineapp&cachebreaker=11">Video Podcasts</a></li>
+						</ul>
+					</li>
+					<li><a href="custom_reader.php?category=news&lcconlineapp&cachebreaker=11">News</a></li>
+					<li><a href="/blogs/">Blogs</a></li>
+					<li><a href="/news/">Website</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+	</div>
+
+	<div id="content">
+		<div class="calendar_search_widget">
+			<form action="" method="" class="search-form searchform" onsubmit="do_calendar_search();return false;">
+				<input class="form-control" type="text" value="Search our calendar…" class="s search-input" name="calendar_search_input"
+				 id="calendar_search_input" onfocus="if (this.value == 'Search our calendar…') {this.value = '';}" onkeyup="calendar_search_helper();" onblur="if (this.value == '') {this.value = 'Search our calendar…';}"/>
+			</form>
+			<div class="calendar_search_results" id="calendar_search_results"></div>
+		</div>
+
+		<script type="text/javascript">
+
+		var myGlobals = function()
+		{
+			lastquery = '';
+		}
+
+		function event_template(gCalEvent)
+		{
+			name = gCalEvent.summary
+			id = gCalEvent.id
+			if (typeof(gCalEvent.description) != 'undefined') description = gCalEvent.description;
+			else description = '';
+
+			all_day = false;
+			multi_day = false;
+
+			if (typeof(gCalEvent.start.dateTime) != 'undefined')
+			{
+				start = new Date(gCalEvent.start.dateTime)
+				start_string = start.toLocaleString();
+			}
+			else
+			{
+				all_day = true;
+				start = new Date(gCalEvent.start.date);
+				start_string = start.getMonth() + '/' + start.getDate() + '/' + start.getFullYear();
+			}
+
+			if (typeof(gCalEvent.end.dateTime) != 'undefined')
+			{
+				end = new Date(gCalEvent.end.dateTime)
+				end_string = end.toLocaleString();
+			}
+			else
+			{
+				end = new Date(gCalEvent.end.date);
+				if ( (end - start) > 86400000 ) multi_day = true;
+				end_string = end.getMonth() + '/' + end.getDate() + '/' + end.getFullYear();
+			}
+			link = gCalEvent.htmlLink
+
+			var html;
+
+			html = '<div class="event" id="event_' + id + '">';
+			html += '<h3><a href="' + link + '">' + name + '</a></h3>';
+			if ( (! all_day) || multi_day )
+			{
+				html += '<div class="event_time event_start"><span class="event_label">Start:</span>' + start_string + '</div>';
+				html += '<div class="event_time event_end"><span class="event_label">End:</span>' + end_string + '</div>';
+			}
+			else
+			{
+				html += '<div class="event_time event_start"><span class="event_label">Date:</span>' + start_string + '</div>';
+			}
+			html += '<div class="event_description">' + description + '</div>';
+			html += '</div>';
+
+			return html;
+		}
+
+		function calendar_search_helper()
+		{
+			jQuery(function($){
+				query = $('#calendar_search_input').val();
+				if (query == myGlobals.lastquery) return;
+				else myGlobals.lastquery = query;
+
+				if (query == '') $('#calendar_search_results').slideUp();
+				else if (query.length < 3)
+				{
+					$('#calendar_search_results').html('Enter at least three characters to start the search.');
+					$('#calendar_search_results').slideDown();
+				}
+				else
+				{
+					do_calendar_search();
+				}
+			});
+		}
+
+		function do_calendar_search()
+		{
+			jQuery(function($){
+				api_key = 'AIzaSyDIMUB-fq0D6C6dl15sGKfcnespVBd1-d8';
+				var today = new Date();
+				today_string = today.toISOString();
+				query = $('#calendar_search_input').val();
+				myGlobals.lastquery = query;
+				url = 'https://www.googleapis.com/calendar/v3/calendars/h8tnk3727iglggv5lg9us2qeb8%40group.calendar.google.com/events?maxResults=10&orderBy=startTime&q=' + encodeURIComponent(query) + '&showDeleted=false&singleEvents=true&timeMin=' + encodeURIComponent(today_string) +  '&key=' + api_key;
+				myGlobals.url = url;
+				//$('#calendar_search_results').html('loading from: <code>' + url + '</code>');
+				$('#calendar_search_results').html('<img src="img/progress.gif" class="alignright" />searching...');
+				$('#calendar_search_results').slideDown();
+				$.ajax({
+					url: url,
+					type: 'GET',
+					dataType: 'jsonp',
+					success: function(data)
+					{
+						document.__data = data;
+						head_out = '<h2>Search Results</h2>';
+						event_html = '';
+						for (i in data.items)
+						{
+							event_html += event_template(data.items[i]);
+						}
+						if (event_html == '') event_html = "Nothing found yet... but don't give up!";
+						$('#calendar_search_results').html(head_out + event_html);
+					},
+					error: function(err, text)
+					{
+						$('#calendar_search_results').html('ERROR: ' + text);
+					}
+				});
+
+			});
+		}
+
+		</script>
+
+		<div class="entry-content">
+			<div class="the-calendar">
+				<h2>All Events</h2>
+				<iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showCalendars=0&amp;mode=AGENDA&amp;height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=h8tnk3727iglggv5lg9us2qeb8%40group.calendar.google.com&amp;color=%23125A12&amp;src=usa%40holiday.calendar.google.com&amp;color=%23AB8B00&amp;ctz=America%2FNew_York" style=" border-width:0 " width="100%" height="500" frameborder="0" scrolling="no"></iframe>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

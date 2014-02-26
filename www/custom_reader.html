@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<!-- CODE FOR INSTALLING AS A WEB APP -->
+		<link rel="apple-touch-icon-precomposed" href="/icon.png"/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+		<title>LCC Online</title>
+
+		<!-- BOOTSTRAP CSS -->
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+
+		<!-- webfont -->
+		<!--<link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>-->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,700,300' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="css/style.css?cachebreaker=11">
+
+		<script type="text/javascript" src="js/handlebars-v1.3.0.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+
+</head>
+<body>
+	<!-- Fixed navbar -->
+	<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<div class="menu-label">
+						menu
+					</div>
+					<div class="pull-right icon-bars">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+				</button>
+				<a class="navbar-brand" href="index.html"><img src="img/small-logo.png" /></a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li class=""><a href="http://lafayettecc.org/live/">Live Event</a></li>
+					<li><a href="http://lafayettecc.org/give/">Online Giving</a></li>
+					<li><a href="http://lafayettecc.org/mobile/calendar.html">Calendar</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Podcasts <b class="caret"></b></a>
+						<ul class="dropdown-menu" aria-labelledby="toolBoxMenu">
+							<li><a href="http://lafayettecc.org/mobile/custom_reader.php?podcast=audio&lcconlineapp&cachebreaker=11">Audio Podcasts</a></li>
+							<li><a href="http://lafayettecc.org/mobile/custom_reader.php?podcast=video&lcconlineapp&cachebreaker=11">Video Podcasts</a></li>
+						</ul>
+					</li>
+					<li><a href="http://lafayettecc.org/mobile/custom_reader.php?category=news&lcconlineapp&cachebreaker=11">News</a></li>
+					<li><a href="http://lafayettecc.org/blogs/">Blogs</a></li>
+					<li><a href="http://lafayettecc.org/news/">Website</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+	</div>
+	<div id="content">
+	</div>
+</body>
+<!-- Latest compiled and minified Bootstrap JavaScript -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+
+
+<script type="text/x-handlebars-template" id="feed_items_template">
+<div id="feed_items" class="all itemlist">
+	{{#each items}}
+	<div class="item">
+		<div class="postmeta">{{date}}</div>
+		<h2><a href="#" onclick="do_single('{{link}}')">{{title}}</a></h2>
+		<p>{{excerpt}}</p>
+	</div><!-- .item -->
+	{{/each}}
+</div><!-- #feed_items -->
+</script>
+
+<script type="text/x-handlebars-template" id="feed_single_item_template">
+</script>
+
+
+<script type="text/javascript">
+
+var feed_items_template = Handlebars.compile($("#feed_items_template").html());
+var feed_single_item_template = Handlebars.compile($("#feed_single_item_template").html());
+var display='all';
+var cachebreaker = "11";
+var is_podcast = false;
+var format = "";
+
+function initialize()
+{
+	GET = getUrlVars();
+
+	if (isset(GET['category']))
+	{
+		cat = GET['category'];
+		url = 'http://lafayettecc.org/news/category/' + cat + '/feed/?json&lcconlineapp&cachebreaker=' + cachebreaker;
+	}
+	if (isset(GET['podcast']))
+	{
+		is_podcast = true;
+		format = GET['podcast'];
+		url = 'http://lafayettecc.org/news/feed/podcast?format=' + format + '&json&lcconlineapp&cachebreaker=' + cachebreaker;
+	}
+	if (isset(GET['single']))
+	{
+		display = 'single';
+		url = GET['single'] + '?json&lcconlineapp&cachebreaker=' + cachebreaker;
+	}
+
+	//$.support.cors = true;
+
+	$.ajax({
+		url: url,
+		dataType: 'jsonp',
+		crossDomain: true,
+		success: function(data)
+		{
+			d = exec(data);
+			console.log(d);
+		}
+	});
+
+}
+
+function display_results(data)
+{
+	console.log(data);
+	$("#content").html(feed_items_template({items: data.posts}));
+}
+
+// Read a page's GET URL variables and return them as an associative array.
+function getUrlVars()
+{
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+function isset(a)
+{
+	return typeof(a) != 'undefined';
+}
+
+function do_page(url)
+{
+	$.get(url, '', function(data){$('#content').html(data)});
+	return false;
+}
+function display_feed(feed_data)
+{
+	html = feed_items_template(feed_data);
+	$('#content').html(html);
+}
+
+function do_feed(url)
+{
+	$.ajax({
+		url: url,
+		data: '',
+		type: 'json',
+		success: function(data){display_feed(data)}
+	});
+}
+</script>
+
+<script type="text/javascript">
+	// LINK PRELOAD SCRIPT
+	var stored_pages = {};
+	var need_to_store = {};
+
+	function do_link(el)
+	{
+
+		console.log(el);
+		url = el.href;
+		alert(url);
+		target_url = url;
+		if (typeof(stored_pages[target_url]) == 'undefined') return true;
+		else
+		{
+			console.log('replacing current body with stored page: ' + target_url);
+			new_body = $('body', $(stored_pages[target_url])).html();
+			$('body').html(new_body);
+			return false;
+		}
+	}
+
+	function do_preload()
+	{
+		//$('a').click(function(event){ if (! do_link(this) ) event.preventDefault();});
+		$('a').each(function(index){
+			url = this.href;
+			need_to_store[url] = false;
+			if ($(this).attr('role') == "stored-page") need_to_store[url] = true;
+			if (need_to_store[url]) console.log('page will be stored');
+			$.get(
+				url,
+				function(data){
+					if (need_to_store[this.url]) window.stored_pages[this.url] = data;
+				}
+			)
+		});
+	}
+
+
+	$(document).ready(function(){
+		initialize();
+		do_preload();
+	});
+
+
+</script>
+</html>

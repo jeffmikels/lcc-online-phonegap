@@ -1,0 +1,91 @@
+/* FONT OVERRIDES */
+body {
+	font-family:"Open Sans", "Helvetica Neue", "Helvetica", Arial, sans-serif;
+	font-size:14px;
+	padding:60px 0 0;
+	background-image: url('../img/light-background.jpg');
+	background-color:white;
+	background-repeat: no-repeat;
+	background-size:100% auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 700;
+	line-height: 1.1;
+	margin:0;
+}
+
+h2 {font-size:1.6em;}
+
+.menu-label{float:left;}
+button.navbar-toggle
+			{
+				color:white;
+				width:110px;
+				vertical-align:top;
+				line-height:10px;
+				font-size:22px;
+			}
+
+.navbar img {height:20px; width:auto;}
+
+.ios-fix-status-bar .navbar {border-top:20px solid white !important;}
+body.ios-fix-status-bar {padding-top:80px;}
+
+a {color:navy;}
+a:hover, a:active {text-decoration:none;color:cyan;}
+
+#menu {background-color:rgba(255,255,255,.5);padding:5%;width:100%;color:white;border-radius:6px;overflow:hidden;}
+#header {background-color:rgba(255,255,255,.1);padding:1%;width:100%;color:black;border-radius:0px;overflow:hidden;margin-bottom:1%;text-align:center;}
+#content {background-color:rgba(255,255,0,.0);padding:0% 2%;}
+#header img {width:100%; max-width:100%;}
+.icon-box {float:left;width:25%;padding:1%;}
+.icon {max-width:100%;}
+.icon-caption {width:100%;padding:2px;text-align:center;}
+
+/*.item {background-color:#c3d8de;width:100%;color:#333;padding:2% 1%;}*/
+a.item-link {color:inherit;text-decoration:none;}
+a.item-link:hover {color:inherit;}
+a.item-link:hover .well {background:#fff;}
+
+
+.all .item {border-bottom:1px solid black;}
+.all .item p {font-size:8pt;}
+.enclosure_links {display:block; font-size:8pt; background:#eee;border-radius:6px;padding:4px 4px;margin-bottom:10px;}
+.enclosure_links a {display: inline-block;padding:2px 4px; background:orange; border-radius:3px;}
+.postmeta {font-size:.8em;}
+.audio, .video {margin-top:10px; width:100%;}
+.media-div {padding:10px 0;margin-bottom:10px;}
+
+.calendar_search_widget {margin: 0px 0;}
+.calendar_search_results {padding:1%;}
+.calendar_search_results .event {padding:1%;background:white;}
+.entry-content {padding:1%;}
+
+.item img, iframe, video, audio {max-width:100%;width:100%;}
+
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px)
+{
+	/* STYLES GO HERE */
+	/*.navbar {position:absolute !important;}
+	#progress-widget {position:absolute !important;}
+	*/
+	/*body {padding:0;}*/
+}
+.btn-block {text-align:left;padding-left:20px;}
+.glyphicon {margin-right: 20px;}

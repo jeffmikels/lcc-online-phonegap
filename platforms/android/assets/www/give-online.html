@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta name="viewport" content="width=device-width" />
+
+<title>LCC Quick Online Giving Page</title>
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,700,300' rel='stylesheet' type='text/css'>
+
+<!-- jquery -->
+<!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
+<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"></script>
+
+
+<style type="text/css">
+
+body {margin:auto;font-size:9pt;background-color:#111 !important;}
+#content {padding:5%;background: #ddd;color:#222;font-family:'Open Sans';}
+#header {background-color:black;padding:20px;}
+#header img {max-width:90%;}
+.ui-collapsible-heading, .ui-btn-inner, .ui-button-text {font-size:1.2em;}
+input.ui-input-text, textarea.ui-input-text {font-size: 2em;}
+
+@media all and (min-width: 1000px){
+
+	body {font-size:14pt;}
+	.ui-collapsible-heading, .ui-btn-inner, .ui-button-text {font-size:1.0em;}
+	input.ui-input-text, textarea.ui-input-text {font-size: 2em;}
+}
+@media all and (-webkit-min-device-pixel-ratio: 1.5){
+	.ui-collapsible-heading, .ui-btn-inner, .ui-button-text {font-size:1.2em;}
+	input.ui-input-text, textarea.ui-input-text {font-size: 2em;}
+}
+
+</style>
+
+
+</head>
+<body>
+<div data-role="page">
+<div id="header">
+<img src="http://lafayettecc.org/images/logo-ball-on-black.png" />
+</div>
+<div id="content">
+<h2>LCC Online Giving</h2>
+<p>Thank you so much for making a donation! It's our dream to help people in Lafayette discover the full life available to them in Christ, and your gifts make that dream possible.
+
+<p>We use <strong>PayPal</strong> for online donations. They will give you the option of using their payment system (PayPal account required), setting up an automatic withdrawal from your bank just like a check, or even using a credit card for recurring donations.
+
+<div data-role="collapsible-set" data-theme="b" data-content-theme="b">
+    <div data-role="collapsible">
+	<h3>Monthly Recurring Gifts</h3>
+	<p>PayPal will process the funds for us as something they call a "subscription" but it will still be registered with us as a tax-deductible donation.
+	<p><small>Note: Enter your number without any $ before it.</small>
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+
+	<input type="hidden" name="cmd" value="_xclick-subscriptions">
+	<input type="hidden" name="business" value="donate@lafayettecc.org">
+	<input type="hidden" name="item_name" value="Recurring Donation">
+	<input type="hidden" name="no_shipping" value="1">
+	<input type="hidden" name="no_note" value="1">
+	<input type="hidden" name="currency_code" value="USD">
+	<input type="hidden" name="bn" value="PP-SubscriptionsBF">
+	<label><strong>Monthly Donation:</strong></label><br />
+	<input type="text" name="a3" value="" placeholder="100.00 < -- no $ sign"/>
+	<input type="hidden" name="p3" value="1">
+	<input type="hidden" name="t3" value="M">
+	<input type="hidden" name="src" value="1">
+	<input type="hidden" name="sra" value="1">
+	<input type="submit" value="Set Up Automatic Donation" name="submit" />
+	</form>
+    </div>
+    <div data-role="collapsible">
+			<h3>One-time Gifts</h3>
+
+			<p>Of course, the monthly support is how we make plans for our ministry, but we will be more than happy to receive special gifts if God leads you to give that way.
+
+			<p>Select your gift amount: <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=50%2e00&business=donate%40lafayettecc%2eorg&item_name=Lafayette%20Community%20Church%20Donation&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8">$50</a>
+			&nbsp;|&nbsp;
+			<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=100%2e00&business=donate%40lafayettecc%2eorg&item_name=Lafayette%20Community%20Church%20Donation&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8">$100</a>
+			&nbsp;|&nbsp;
+			<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=200%2e00&business=donate%40lafayettecc%2eorg&item_name=Lafayette%20Community%20Church%20Donation&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8">$200</a>
+			&nbsp;|&nbsp;
+			<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=500%2e00&business=donate%40lafayettecc%2eorg&item_name=Lafayette%20Community%20Church%20Donation&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8">$500</a>
+
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="">
+			<label><strong>Other:</strong></label><br />
+			<input type="text" name="amount" value="" placeholder="250.00 < -- no $ sign"/>
+			<input type="hidden" name="cmd" value="_xclick" />
+			<input type="hidden" name="business" value="donate@lafayettecc.org" />
+			<input type="hidden" name="item_name" value="Lafayette Community Church Donation" />
+			<input type="hidden" name="no_note" value="0" />
+			<input type="hidden" name="cn" value="Memo:" />
+			<input type="hidden" name="currency_code" value="USD" />
+			<input type="hidden" name="tax" value="0" />
+			<input type="hidden" name="bn" value="PP-DonationsBF" />
+			<input type="submit" name="submit" value="Make Donation" />
+			</form>
+    </div>
+    <div data-role="collapsible">
+			<h3>Christmas Generosity Project</h3>
+
+			<p>Every dollar will be doubled by a $5000 matching grant we have been given!</p>
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+				<input type="hidden" name="cmd" value="_s-xclick">
+				<input type="hidden" name="hosted_button_id" value="A66GDYVWH2SCS">
+				<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+				<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+			</form>
+
+    </div>
+
+</div>
+
+
+
+
+<p>If you want to give to our missionaries, click here: <a target="blank" href="http://lafayettecc.org/mission">Our Missionaries</a>.
+
+<p>We use <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=donate%40lafayettecc%2eorg&item_name=Lafayette%20Community%20Church%20Donation&no_shipping=0&no_note=1&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8">PayPal</a>.
+
+
+<div style="clear:both;"></div>
+
+
+<em>All gifts are tax deductible.</em>
+</div>
+</div>
+</body>
+</html>
